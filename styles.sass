@@ -1,0 +1,121 @@
+@use 'variables'
+@use 'mixins'
+@use 'sass:list'
+    
+$imagens: 'animais.jpg', 'arquitetura.jpg', 'cidade.jpg', 'decoracao.jpg', 'esportes.jpg', 'natureza.jpg', 'paisagem.jpg', 'pessoas.jpg', 'refeicoes.jpg'
+
+* 
+    font-family:    'Josefin Sans'
+    padding:        0
+    margin:         0
+    box-sizing:     border-box
+
+body
+    background-color:   variables.$bg_color
+    color:              variables.$text_color
+
+    a
+        color:              variables.$text_color
+        text-decoration:    none
+        transition:         .4s
+
+    ul
+        list-style:         none
+
+.header
+    display: flex
+    justify-content: space-between
+    align-items: center
+    @include mixins.container
+
+    @include mixins.mobile(425)
+        padding: 1.1rem
+
+    &-brand // .header-brand
+        color: variables.$primary_color
+        font-size: 3rem
+    
+    &-navbar // header.nav-bar
+
+        ul
+            height: 100%
+            @include mixins.flex-center
+
+            @include mixins.mobile(1024)
+                display: none
+
+            li
+                margin: 0 1rem
+                text-transform: uppercase
+                font-size: 1rem
+
+                .active
+                    color: variables.$secundary_color
+                
+                a
+                    &:hover
+                        color: variables.$secundary_color
+
+    &-social-media
+
+        ul
+            @include mixins.flex-center
+            height: 100%
+
+            @include mixins.mobile(1024)
+                display: none
+
+            li
+                margin: 0 1rem
+
+                a
+                    &:hover
+                        color: variables.$primary_color
+
+.gallery
+    @include mixins.flex-center
+    @include mixins.container
+    flex-wrap: wrap
+    justify-content: space-between
+    padding: 0
+    @include mixins.mobile(1024)
+        flex-direction: column
+
+    &-card // .gallery-card
+        width: 31%
+        height: 400px
+        margin-bottom: 4%
+        @include mixins.flex-center
+        flex-direction: column
+        color: variables.$primary_color
+        @include mixins.mobile(1024)
+            width: 90%
+            margin-bottom: 6%
+
+        &-title
+            font-size: 2rem
+            font-weight: 300
+            margin-bottom: 1rem
+        
+        &-btn
+            padding: .6rem 2rem
+            border: 2px solid variables.$primary_color
+            color: variables.$primary_color
+            font-weight: 400
+            text-transform: uppercase
+            letter-spacing: 1px
+
+            &:hover
+                background-color: variables.$primary_color
+                color: variables.$bg_color
+
+    @for $i from 1 through 9
+         #card-#{$i}
+             @include mixins.bg-img(list.nth($imagens, $i))
+footer
+    text-align: center
+    padding-bottom: 2rem
+
+    span
+        font-weight: bold
+        color: variables.$secundary_color
